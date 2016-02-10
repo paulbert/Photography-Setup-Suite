@@ -4,12 +4,11 @@
 		return {
 			scope: {
 				search:'=',
-				itemsToChange:'=items',
-				messageNum:'=?message',
-				listNum:'=list',
+				listName:'=list',
 				keyName:'@key',
-				hideOverlay:'=?hide',
-				editType:'=?adv'
+				ordKey:'@ordName',
+				// Additional functions to be called from buttons in the list (save info, delete, etc)
+				addFuncs:'=funcs'
 			},
 			template: '<div ng-include="tempUrl"></div>',
 			controller:'listController',

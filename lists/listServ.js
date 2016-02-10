@@ -29,12 +29,13 @@
 			}
 		};
 		
-		// First checks exclude array for filter, then checks search value (see filterFunctions service)
+		// First checks exclude array for item, then checks search value (see filterService.js)
 		this.filterCheck = function(value,index,search,keyName,listName) {
 			var listCheck = false;
 			listCheck = lFunc.findById(value[keyName],lFunc.Lists[listName].exclude,keyName);
 			if(listCheck === false) {
 				var showItem = filterFunctions.filterCheck(value,search);
+				// Deselect item if the filter excludes the item
 				if(value.selected && !showItem && index >= 0) {
 					lFunc.deselectItem(value[keyName],index,keyName,listName);
 				}
