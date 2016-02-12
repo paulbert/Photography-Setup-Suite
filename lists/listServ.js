@@ -1,5 +1,5 @@
 (function() {
-	angular.module('photoSuite')
+	angular.module('listMod')
 	.service('listFunctions', ['$q','getPhotoData',function ($q,getPhotoData) {
 		
 		var lFunc = this,

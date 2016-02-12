@@ -1,6 +1,6 @@
 (function() {
 	
-	angular.module('bruceEdit')
+	angular.module('overlayMod',[])
 	.directive('overlay', function() {
 		return {
 			scope: {

@@ -1,6 +1,6 @@
 (function() {
 	
-	angular.module('bruceEdit')
+	angular.module('filterMod',[])
 	.directive('filterBar', function() {
 		return {
 			scope: {

@@ -1,6 +1,6 @@
 (function() {
 	
-	angular.module('bruceEdit')
+	angular.module('filterMod')
 	.service('filterFunctions', function() {
 			
 		var fFunctions = this;

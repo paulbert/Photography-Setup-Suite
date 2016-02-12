@@ -1,6 +1,6 @@
 (function() {
 	
-	angular.module('bruceEdit')
+	angular.module('overlayMod')
 		.controller('overlayController', ['$scope','listFunctions','doOverlayActions','openTabs', function($scope,listFunctions,doOverlayActions,openTabs) {
 			
 			var oCtrl = this;

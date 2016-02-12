@@ -1,6 +1,6 @@
 (function() {
 	
-	angular.module('bruceEdit')
+	angular.module('filterMod')
 	.controller('filterCompController', ['$scope','filterFunctions', function($scope,filterFunctions) {
 		this.onlyBox = function(boxNum,boxName) {
 			var i = 0;

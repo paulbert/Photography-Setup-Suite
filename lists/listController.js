@@ -1,5 +1,5 @@
 (function() {
-	angular.module('listMod',[])
+	angular.module('listMod')
 	.controller('listController',['$scope','$rootScope','$timeout','openTabs','listFunctions','filterFunctions','doOverlayActions','getPhotoData',function($scope,$rootScope,$timeout,openTabs,listFunctions,filterFunctions,doOverlayActions,getPhotoData) {
 		
 		var lCtrl = this,

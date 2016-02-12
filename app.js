@@ -1,4 +1,4 @@
 (function() {
-	angular.module('photoSuite', []);
+	angular.module('photoEditComponents', ['listMod','filterMod','overlayMod']);
 	
 })();

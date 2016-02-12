@@ -1,6 +1,6 @@
 (function() {
 	
-	angular.module('bruceEdit')
+	angular.module('filterMod')
 	.controller('filterBarController', ['$scope','getPhotoData', function($scope,getPhotoData) {
 			
 			this.galleries = [];
