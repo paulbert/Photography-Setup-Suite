@@ -25,25 +25,12 @@
 			return listFunctions.filterCheck(value,index,$scope.search,keyName,listName);
 		};
 		
-		// Returns the length of the main list.
-		this.getLength = function(listName) {
-			return listFunctions.mainList[listName].length;
-		};
-		
-		this.addToSections = function() {
-			if(this.newSection !== '') {
-				this.List.sectionList.push({section:this.newSection,id:this.List.sectionList.length});
+		// Returns the length a list (main list if not specified).
+		this.getLength = function(listName,subList) {
+			if(!subList) {
+				subList = 'main';
 			}
-		};
-		
-		this.linkSection = function(key,ordKey) {
-			var theSection = this.currentSection.section;
-			if(theSection !== '' && !listFunctions.checkSelected($scope.listName)) {
-				listFunctions.groupSelected(key,ordKey,theSection,$scope.listName);
-			} else if(!listFunctions.checkSelected($scope.listName)) {
-				listFunctions.removeSection(key,$scope.listName);
-			}
-			doOverlayActions.galleryOrderAndSection(listFunctions.mainList[$scope.listName]);
+			return listFunctions.Lists.[listName].length;
 		};
 		
 		// Change order of list.
