@@ -32,7 +32,7 @@
 		// First checks exclude array for item, then checks search value (see filterService.js)
 		this.filterCheck = function(value,index,search,keyName,listName) {
 			var listCheck = false;
-			listCheck = lFunc.findById(value[keyName],lFunc.Lists[listName].exclude,keyName);
+			listCheck = lFunc.findById(value[keyName],listName,keyName,'exclude');
 			if(listCheck === false) {
 				var showItem = filterFunctions.filterCheck(value,search);
 				// Deselect item if the filter excludes the item
@@ -66,7 +66,7 @@
 			key = key ? key : 'id';
 			var id = item[key];
 			if(!index && index !== 0) {
-				index = this.findById(id,this.Lists[listName].main,key);
+				index = this.findById(id,listName,key,'main');
 			}
 			if(!item.selected) {
 				this.selectItem(item,index,key,listName);
@@ -90,11 +90,13 @@
 			return message;
 		};
 
-		// Returns the index of the photo within the array or false if not found.  Search by id.
-		this.findById = function(id,array,key) {
+		// Returns the index of the item within the an array (specified by listName and subList) or false if not found.  Search by key (should be unique id.
+		this.findById = function(id,listName,key,subList) {
 			key = typeof key !== 'undefined' ? key : 'id';
-			for(var i = 0; i < array.length; i++) {
-				if(String(array[i][key]) === String(id)) {
+			subList = typeof subList !== 'undefined' ? subList : 'main';
+			var listArray = this.Lists[listName][subList];
+			for(var i = 0; i < listArray.length; i++) {
+				if(String(listArray[i][key]) === String(id)) {
 					return i;
 				}			
 			}
@@ -102,10 +104,11 @@
 		};
 		
 		// Deletes items found in delArray from mainList searching by id. Returns new array.
-		this.deleteById = function(delArray,idName,listName) {
+		this.deleteById = function(delArray,idName,listName,subList) {
 			var numItems = delArray.length;
+			subList = typeof subList !== 'undefined' ? subList : 'main';
 			for(var i = 0; i < numItems; i++) {
-				var imgIndex = lFunc.findById(delArray[i][idName],lFunc.Lists[listName].main,idName);
+				var imgIndex = lFunc.findById(delArray[i][idName],listName,idName,subList);
 				lFunc.Lists[listName].main.splice(imgIndex,1);
 			}
 		};
@@ -139,14 +142,14 @@
 		this.deselectItem = function(id,index,key,listName) {
 			key = typeof key !== 'undefined' ? key : 'id';
 			lFunc.Lists[listName].main[index].selected = false;
-			var selIndex = lFunc.findById(id,lFunc.Lists[listName].selected,key);
+			var selIndex = lFunc.findById(id,listName,key,'selected');
 			lFunc.Lists[listName].selected.splice(selIndex,1);
 		};
 
 		this.selectItem = function(item,index,key,listName) {
 			key = typeof key !== 'undefined' ? key : 'id';
 			if(!index) {
-				index = this.findById(item[key],this.Lists[listName].main,key);
+				index = this.findById(item[key],listName,key,'main');
 			}
 			this.Lists[listName].main[index].selected = true;
 			this.Lists[listName].selected.push(item);
@@ -181,7 +184,7 @@
 			for(i = 0; i < lFunc.Lists[listName].main.length; i++) {
 				lFunc.Lists[listName].main[i][ordKey] = i;
 				if(lFunc.Lists[listName].main.selected) {
-					selIndex = lFunc.findById(lFunc.Lists[listName].main[i][key],lFunc.Lists[listName].selected,key);
+					selIndex = lFunc.findById(lFunc.Lists[listName].main[i][key],listName,key,'selected');
 					lFunc.Lists[listName].selected[selIndex][ordKey] = i;
 					if(typeof section !== 'undefined') {
 						lFunc.Lists[listName].selected[selIndex].section = section;
@@ -212,73 +215,54 @@
 			resetOrder(key,ordKey,listNum,section);
 		};
 		
-		// Removes section from selected photos.
-		this.removeSection = function(key,listNum) {
-			var index;
-			for(var i = 0; i < lFunc.selectedList[listNum].length; i++) {
-				index = lFunc.findById(lFunc.selectedList[listNum][i][key],lFunc.mainList[listNum],key);
-				lFunc.mainList[listNum][index].section = '';
-			}
-		};
-		
 		// Moves an item or items.  Checks the sections of the items to ensure items within same section stick together.
-		this.moveItems = function(direction,key,ordKey,listNum) {
+		this.moveItems = function(direction,key,ordKey,listName) {
 			var selSection,
-				listLen = lFunc.mainList[listNum].length,
+				listLen = lFunc.Lists[listName].main.length,
 				multiplier,
 				nextSection;
 			var i = direction > 0 ? listLen - 1 : 0;
+			// Loop through main list opposite the direction of the movement of items to make sure order is otherwise preserved.
 			for(i; i < listLen && i >= 0; i = i - direction) {
 				multiplier = 1;
-				if(lFunc.findById(lFunc.mainList[listNum][i][key],lFunc.selectedList[listNum],key) !== false || lFunc.mainList[listNum][i].section === selSection) {
-					if(lFunc.mainList[listNum][i].section !== '') {
-						selSection = lFunc.mainList[listNum][i].section;
+				// If the item is in the selected list or the section is moving.
+				if(lFunc.findById(lFunc.Lists[listName].main[i][key],listName,key,'selected') !== false || lFunc.Lists[listName].main[i].section === selSection) {
+					// Set selSection to section of a selected item.
+					if(lFunc.Lists[listName].main[i].section !== '') {
+						selSection = lFunc.Lists[listName].main[i].section;
 					}
-					if(i+direction >= 0 && i+direction < listLen && !lFunc.mainList[listNum][i+direction].selected) {
+					// If the movement would put the item outside of list boundaries or another selection has hit those boundaries don't move.
+					if(i+direction >= 0 && i+direction < listLen && !lFunc.Lists[listName].main[i+direction].selected) {
+						// If the next item is in a defined section, need to check & count items in section to jump over or stop movement.
 						if(lFunc.mainList[listNum][i+direction].section !== '' && lFunc.mainList[listNum][i].section !== lFunc.mainList[listNum][i+direction].section) {
-							nextSection = lFunc.mainList[listNum][i+direction].section;
+							nextSection = lFunc.Lists[listName].main[i+direction].section;
 							multiplier = 0;
+							// Loop back through array in the direction of movement.
 							for(var j = i + direction; j < listLen && j >= 0; j = j + direction) {
-								if(lFunc.mainList[listNum][j].section === nextSection) {
+								// If the item is in the section...
+								if(lFunc.Lists[listName].main[j].section === nextSection) {
+									// If selected stop movement and break.
 									if(lFunc.mainList[listNum][j].selected) {
 										multiplier = 0;
 										break;
 									}
+									// If not, count section.
 									multiplier++;
 								} else {
+									// Break loop at first item not in section.
 									break;
 								}
 							}
 						}
-						if(lFunc.mainList[listNum][i].selected || lFunc.mainList[listNum][i+direction].section !== lFunc.mainList[listNum][i].section) {
-							lFunc.mainList[listNum].splice(i+(direction*multiplier),0,lFunc.mainList[listNum].splice(i,1)[0]);
+						// Final check: only move an item if it is selected or to ensure items of the same section stick together
+						if(lFunc.Lists[listName].main[i].selected || lFunc.Lists[listName].main[i+direction].section !== lFunc.Lists[listName].main[i].section) {
+							lFunc.Lists[listName].main.splice(i+(direction*multiplier),0,lFunc.Lists[listName].main.splice(i,1)[0]);
 						}
 					}
 				}
 			}
-			resetOrder(key,ordKey,listNum);
-		};
-		
-		this.updateLists = function(table,idName,listNum) {
-			var index,
-				deferred = $q.defer(),
-				listLen = editList.length > currentFilteredList ? editList.length : currentFilteredList.length;
-				
-			getPhotoData[table](true).then(function(response) {
-				lFunc.mainList[listNum] = response.data;
-				for(var i = 0; i < editList.length; i++) {
-					index = lFunc.findById(editList[i][idName],lFunc.mainList[listNum],idName);
-					editList[i] = lFunc.mainList[listNum][index];
-				}
-				for(var i = 0; i < currentFilteredList.length; i++) {
-					index = lFunc.findById(currentFilteredList[i][idName],lFunc.mainList[listNum],idName);
-					currentFilteredList[i] = lFunc.mainList[listNum][index];
-				}
-				deferred.resolve();
-			});
-			
-			return deferred.promise;
-			
+			// Reset order variable for database.
+			resetOrder(key,ordKey,listName);
 		};
 		
 	}]);
