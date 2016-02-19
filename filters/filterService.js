@@ -6,20 +6,19 @@
 		var fFunctions = this;
 		
 		// Checks for a match with the filters.
-		// First checks if any of the galleries attached to the current photo match.
-		// Next checks for photos matching the query.
-		// Both must match for the photo to appear.
+		// If the value is an array, checks all values for one match.
+		// If not, just checks single value.
 		this.filterCheck = function(value,search) {
 			var allMatch = true;
 			
 			for(var key in search) {
 				if(search.hasOwnProperty(key)) {
-					var arrayValues = value[key] || value[search[key].arrayName];
-					if(arrayValues && search[key].isArray) {
-						var numValues = arrayValues.length,
+					var thisValue = value[key];
+					if(search[key].isArray) {
+						var numValues = thisValue.length,
 							matchFound = false;
 						for(var i = 0; i < numValues; i++) {
-							if(checkValue(arrayValues[i], search, key)) {
+							if(checkValue(thisValue[i], search, key)) {
 								matchFound = true;
 								break;
 							}
@@ -28,7 +27,7 @@
 							allMatch = false;
 						}
 					} else {
-						allMatch = checkValue(value[key], search, key);
+						allMatch = checkValue(thisValue, search, key);
 					}
 					if(allMatch === false) {
 						break;
@@ -66,10 +65,10 @@
 			if(!value) {
 				value = '';
 			}
-			return value.toLowerCase().indexOf(query.toLowerCase()) > -1
+			return value.toLowerCase().indexOf(query.toLowerCase()) > -1;
 		};
 		
-		// Function to loop through the checkboxes variable and return true if the gallery is a match
+		// Function to loop through the checkboxes variable and return true if the value is a match
 		var checkTheBoxes = function (value,filterset,checkboxes) {
 			if(value) {
 				var i = 0;
