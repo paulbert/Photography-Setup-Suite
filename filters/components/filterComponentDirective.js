@@ -10,7 +10,10 @@
 				},
 				templateUrl: '/templates/edit/filtercomp.html',
 				controller:'filterCompController',
-				controllerAs:'fcomp'
+				controllerAs:'fcomp',
+				link: function(scope,element,attrs) {
+					scope.templateUrl = '/templates/edit/' + attrs.tmplt;
+				}
 			}
 		})
 	;

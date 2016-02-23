@@ -10,11 +10,11 @@
 				// Additional functions to be called from buttons in the list (save info, delete, etc)
 				addFuncs:'=funcs'
 			},
-			template: '<div ng-include="tempUrl"></div>',
+			template: '<div ng-include="templateUrl"></div>',
 			controller:'listController',
 			controllerAs:'list',
 			link: function(scope,element,attrs) {
-				scope.tempUrl = '/templates/edit/' + attrs.temp;
+				scope.templateUrl = '/templates/edit/' + attrs.tmplt;
 			}
 		}
 	})
