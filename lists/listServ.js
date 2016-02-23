@@ -21,9 +21,10 @@
 			return this.Lists[listName].selected.length === 0;
 		};
 		
-		this.mainListLength = function(listName) {
+		this.listLength = function(listName,subList) {
+			subList = typeof subList !== 'undefined' ? subList : 'main';
 			if(this.Lists[listName]) {
-				return this.Lists[listName].main.length;
+				return this.Lists[listName][subList].length;
 			} else {
 				return 0;
 			}
@@ -152,29 +153,6 @@
 			}
 			this.Lists[listName].main[index].selected = true;
 			this.Lists[listName].selected.push(item);
-		};
-				
-		this.setEditList = function(eList,listName) {
-			this.Lists[listName].edit = eList;
-		};
-
-		this.getEditList = function(listName) {
-			return this.Lists[listName].edit;
-		};
-		
-		this.getFilteredList = function(listName) {
-			return this.Lists[listName].filtered;
-		};
-		
-		this.setSectionList = function(sList) {
-			this.sectionList = sList;
-		};
-		
-		// Sorts by the order column of the data (as specified by ordKey).  Direction is 1 for ascending and -1 for descending.
-		var ordSort = function(ordKey,direction) {
-			return function(a,b) {
-				return direction * (a[ordKey] - b[ordKey]);
-			}
 		};
 		
 		// After items are moved in list, sets the order value (named ordKey) to the correct number for the DB.  Also adds order and section to the selected list.
