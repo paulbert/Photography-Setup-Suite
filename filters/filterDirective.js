@@ -22,7 +22,8 @@
 			controller:'filterBarController',
 			controllerAs:'fbar',
 			link: function(scope,element,attrs) {
-				scope.templateUrl = '/templates/edit/' + attrs.tmplt;
+				scope.base = attrs.tmplt.base;
+				scope.templateUrl = attrs.tmplt.base + attrs.tmplt.fileName;
 			}
 		}
 	})

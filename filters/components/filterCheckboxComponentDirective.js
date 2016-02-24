@@ -5,11 +5,15 @@
 			return {
 				scope: {
 					items:'=',
-					search:'='
+					search:'=',
+					base:'='
 				},
-				templateUrl: '/filters/components/filterCheckboxes.html',
 				controller:'filterCompController',
 				controllerAs:'fcomp',
+				template: '<div ng-include="templateUrl"></div>',
+				link: function(scope,element,attrs) {
+					scope.templateUrl = scope.base + 'filterCheckboxes.html';
+				}
 			}
 		})
 	;

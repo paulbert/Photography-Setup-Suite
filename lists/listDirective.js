@@ -14,7 +14,7 @@
 			controller:'listController',
 			controllerAs:'list',
 			link: function(scope,element,attrs) {
-				scope.templateUrl = '/templates/edit/' + attrs.tmplt;
+				scope.templateUrl = attrs.tmplt.base + attrs.tmplt.fileName;
 			}
 		}
 	})
