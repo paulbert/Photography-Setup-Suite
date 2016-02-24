@@ -18,9 +18,12 @@
 				fposition:'=?',
 				inline:'@?'
 			},
-			templateUrl: '/templates/edit/filterbar.html',
+			template: '<div ng-include="templateUrl"></div>',
 			controller:'filterBarController',
-			controllerAs:'fbar'
+			controllerAs:'fbar',
+			link: function(scope,element,attrs) {
+				scope.templateUrl = '/templates/edit/' + attrs.tmplt;
+			}
 		}
 	})
 	;

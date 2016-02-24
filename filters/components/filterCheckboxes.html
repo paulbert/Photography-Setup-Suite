@@ -1,0 +1,16 @@
+
+<div class="checkbox-group">
+	<a href="" class="small" ng-click="fcomp.allBoxes()">check all</a>
+	<div class="checkbox" ng-repeat="item in items" ng-show="fcomp.showCheckbox(item,search.query)">
+		<label>
+			<input type="checkbox" ng-model="search.checkboxes[$index]" ng-true-value="'{{item}}'" checked>{{item}}
+		</label>
+		<a href="" class="small" ng-click="fcomp.onlyBox($index, item)">only</a>
+	</div>
+	<div class="checkbox" ng-show="fcomp.showCheckbox('',search.query)">
+		<label>
+			<input type="checkbox" ng-model="search.checkboxes.none">None
+		</label>
+		<a href="" class="small" ng-click="fcomp.onlyBox('none')">only</a>
+	</div>
+</div>
