@@ -4,11 +4,11 @@
 	.directive('overlay', function() {
 		return {
 			scope: {
-				message:'=',
+				messages:'=',
 				messageNum:'=number',
 				btnConfig:'=cfg',
 				// Function for action of overlay (cancel/back is in controller)
-				doAction:'=func'
+				doFunction:'=func'
 			},
 			controller:'overlayController',
 			controllerAs:'over',
