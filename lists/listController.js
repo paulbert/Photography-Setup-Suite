@@ -30,7 +30,7 @@
 			if(!subList) {
 				subList = 'main';
 			}
-			return listFunctions.Lists.[listName].length;
+			return listFunctions.Lists[listName].length;
 		};
 		
 		// Change order of list.
