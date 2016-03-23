@@ -1,6 +1,6 @@
 (function() {
 	angular.module('listMod')
-	.service('listFunctions', ['$q','getPhotoData',function ($q,getPhotoData) {
+	.service('listFunctions', ['$q',function ($q) {
 		
 		var lFunc = this,
 			editList = [],

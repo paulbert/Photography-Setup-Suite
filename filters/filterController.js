@@ -1,7 +1,7 @@
 (function() {
 	
 	angular.module('filterMod')
-	.controller('filterBarController', ['$scope','getPhotoData', function($scope,getPhotoData) {
+	.controller('filterBarController', ['$scope', function($scope) {
 			
 			this.galleries = [];
 			

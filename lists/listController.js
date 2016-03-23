@@ -1,6 +1,6 @@
 (function() {
 	angular.module('listMod')
-	.controller('listController',['$scope','$rootScope','$timeout','openTabs','listFunctions','filterFunctions','doOverlayActions','getPhotoData',function($scope,$rootScope,$timeout,openTabs,listFunctions,filterFunctions,doOverlayActions,getPhotoData) {
+	.controller('listController',['$scope','$rootScope','listFunctions',function($scope,$rootScope,listFunctions) {
 		
 		var lCtrl = this,
 			key = $scope.keyName,
