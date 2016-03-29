@@ -8,7 +8,8 @@
 				messageNum:'=number',
 				btnConfig:'=cfg',
 				// Function for action of overlay (cancel/back is in controller)
-				doAction:'=func'
+				doAction:'=func',
+				base:'@?'
 			},
 			controller:'overlayController',
 			controllerAs:'over',
