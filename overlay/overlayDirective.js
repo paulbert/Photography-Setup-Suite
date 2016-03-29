@@ -18,7 +18,7 @@
 				if(typeof scope.base === 'undefined') {
 					scope.base = '/bower_components/Photography-Setup-Suite/templates/overlay/';
 				}
-				scope.templateUrl = attrs.tmplt.base + 'overlay.html';
+				scope.templateUrl = scope.base + 'overlay.html';
 			}
 		}
 	})
