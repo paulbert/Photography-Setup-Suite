@@ -54,12 +54,12 @@
 		// Creates a list of only the currently filtered elements of the main array. Returns this filtered array.
 		this.setFilterArray = function(listName) {
 			var mainArray = this.Lists[listName].main;
-			for(var i = 0; i < mainArray; i++) {
+			for(var i = 0; i < mainArray.length; i++) {
 				if(mainArray[i].showItem === true) {
 					this.Lists[listName].filtered.push(mainArray[i]);
 				}
 			}
-			return this.Lists[listName].filtered
+			return this.Lists[listName].filtered;
 		};
 		
 		this.toggleSelect = function(item,index,key,listName) {
