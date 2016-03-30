@@ -4,6 +4,7 @@
 		
 		var lCtrl = this,
 			key = $scope.keyName,
+			ordKey = $scope.ordName,
 			listName = $scope.listName;
 		
 		// Sets selectedList as empty array for this list number.
@@ -34,9 +35,21 @@
 		};
 		
 		// Change order of list.
-		this.moveItems = function(direction,key) {
+		this.moveItems = function(direction) {
 			listFunctions.moveItems(direction,key,ordKey,listName);
 			this.orderSavePending = true;
+		};
+		
+		this.checkSelected = function() {
+			return listFunctions.checkSelected(listName);
+		};
+		
+		this.selectAll = function() {
+			listFunctions.selectAll(key,listName);
+		};
+		
+		this.deselectAll = function() {
+			listFunctions.deselectAll(key,listName);
 		};
 		
 	}])

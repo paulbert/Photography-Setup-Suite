@@ -6,7 +6,7 @@
 				search:'=',
 				listName:'=list',
 				keyName:'@key',
-				ordKey:'@ordName',
+				ordKey:'@ordname',
 				// Additional functions to be called from buttons in the list (save info, delete, etc)
 				addFuncs:'=funcs',
 				tmplt:'='
