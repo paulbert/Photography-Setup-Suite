@@ -16,14 +16,14 @@
 			scope: {
 				search:'=',
 				fposition:'=?',
-				inline:'@?'
+				inline:'@?',
+				tmplt:'='
 			},
 			template: '<div ng-include="templateUrl"></div>',
 			controller:'filterBarController',
 			controllerAs:'fbar',
 			link: function(scope,element,attrs) {
-				scope.base = attrs.tmplt.base;
-				scope.templateUrl = attrs.tmplt.base + attrs.tmplt.fileName;
+				scope.templateUrl = scope.tmplt.base + scope.tmplt.fileName;
 			}
 		}
 	})

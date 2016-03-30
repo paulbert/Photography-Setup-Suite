@@ -5,7 +5,7 @@
 			return {
 				scope: {
 					search:'=',
-					base:'?='
+					base:'=?'
 				},
 				template: '<div ng-include="templateUrl"></div>',
 				link: function(scope,element,attrs) {

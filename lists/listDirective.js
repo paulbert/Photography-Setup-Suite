@@ -8,13 +8,14 @@
 				keyName:'@key',
 				ordKey:'@ordName',
 				// Additional functions to be called from buttons in the list (save info, delete, etc)
-				addFuncs:'=funcs'
+				addFuncs:'=funcs',
+				tmplt:'='
 			},
 			template: '<div ng-include="templateUrl"></div>',
 			controller:'listController',
 			controllerAs:'list',
 			link: function(scope,element,attrs) {
-				scope.templateUrl = attrs.tmplt.base + attrs.tmplt.fileName;
+				scope.templateUrl = scope.tmplt.base + scope.tmplt.fileName;
 			}
 		}
 	})
