@@ -22,7 +22,7 @@
 		
 		// Custom filter function checking item first against a list of exclusions then against custom filter values
 		this.filterCheck = function(value,index,array) {
-			return listFunctions.filterCheck(value,index,$scope.search,keyName,listName);
+			return listFunctions.filterCheck(value,index,$scope.search,key,listName);
 		};
 		
 		// Returns the length a list (main list if not specified).
@@ -30,7 +30,7 @@
 			if(!subList) {
 				subList = 'main';
 			}
-			return listFunctions.Lists[listName].length;
+			return listFunctions.Lists[listName][subList].length;
 		};
 		
 		// Change order of list.
