@@ -103,7 +103,7 @@
 			return false;
 		};
 		
-		// Deletes items found in delArray from mainList searching by id. Returns new array.
+		// Deletes items found in delArray from main list searching by id. Returns new array.
 		this.deleteById = function(delArray,idName,listName,subList) {
 			var numItems = delArray.length;
 			subList = typeof subList !== 'undefined' ? subList : 'main';
@@ -189,7 +189,7 @@
 				}
 			}
 			lFunc.Lists[listName].main = listTemp;
-			resetOrder(key,ordKey,listNum,section);
+			resetOrder(key,ordKey,listName,section);
 		};
 		
 		// Moves an item or items.  Checks the sections of the items to ensure items within same section stick together.
@@ -211,7 +211,7 @@
 					// If the movement would put the item outside of list boundaries or another selection has hit those boundaries don't move.
 					if(i+direction >= 0 && i+direction < listLen && !lFunc.Lists[listName].main[i+direction].selected) {
 						// If the next item is in a defined section, need to check & count items in section to jump over or stop movement.
-						if(lFunc.mainList[listNum][i+direction].section !== '' && lFunc.mainList[listNum][i].section !== lFunc.mainList[listNum][i+direction].section) {
+						if(lFunc.Lists[listName].main[i+direction].section !== '' && lFunc.Lists[listName].main[i].section !== lFunc.Lists[listName].main[i+direction].section) {
 							nextSection = lFunc.Lists[listName].main[i+direction].section;
 							multiplier = 0;
 							// Loop back through array in the direction of movement.
@@ -219,7 +219,7 @@
 								// If the item is in the section...
 								if(lFunc.Lists[listName].main[j].section === nextSection) {
 									// If selected stop movement and break.
-									if(lFunc.mainList[listNum][j].selected) {
+									if(lFunc.Lists[listName].main[j].selected) {
 										multiplier = 0;
 										break;
 									}
