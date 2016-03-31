@@ -18,7 +18,7 @@
 				fposition:'=?',
 				inline:'@?',
 				tmplt:'=',
-				checkItems:'=?'
+				checkitems:'=?'
 			},
 			template: '<div ng-include="templateUrl"></div>',
 			controller:'filterBarController',
