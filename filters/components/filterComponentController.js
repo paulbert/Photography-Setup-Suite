@@ -2,6 +2,21 @@
 	
 	angular.module('filterMod')
 	.controller('filterCompController', ['$scope','filterFunctions', function($scope,filterFunctions) {
+		
+		var boxSetup = function (items) {
+			
+			var checkboxes.none = true;
+			
+			for(var i = 0; i < items.length; i++) {
+				checkboxes[i] = items[i];
+			}
+			
+			return checkboxes;
+			
+		};
+		
+		$scope.search.checkboxes = boxSetup($scope.items);
+		
 		this.onlyBox = function(boxNum,boxName) {
 			var i = 0;
 			do {
@@ -25,7 +40,8 @@
 		
 		this.showCheckbox = function (value,query) {
 			return filterFunctions.queryFilterCheck(value,query);
-		};
+		};	
+		
 	}])
 	;
 })();
