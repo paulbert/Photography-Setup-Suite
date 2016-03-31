@@ -5,7 +5,7 @@
 		
 		var boxSetup = function (items) {
 			
-			var checkboxes.none = true;
+			var checkboxes = {none:true};
 			
 			for(var i = 0; i < items.length; i++) {
 				checkboxes[i] = items[i];
