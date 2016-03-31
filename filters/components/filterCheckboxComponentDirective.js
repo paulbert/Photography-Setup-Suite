@@ -6,7 +6,7 @@
 				scope: {
 					items:'=',
 					search:'=',
-					base:'='
+					base:'=?'
 				},
 				controller:'filterCompController',
 				controllerAs:'fcomp',
