@@ -17,6 +17,8 @@
 		
 		$scope.search.checkboxes = boxSetup($scope.items);
 		
+		$scope.$watch('items',boxSetup($scope.items));
+		
 		this.onlyBox = function(boxNum,boxName) {
 			var i = 0;
 			do {
