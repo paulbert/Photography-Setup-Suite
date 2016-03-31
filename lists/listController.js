@@ -11,7 +11,7 @@
 		listFunctions.clearSelected(listName);
 		this.hideOverlay = true;
 		
-		this.List = listFunctions;
+		this.lFunc = listFunctions;
 		this.newSection = '';
 		this.currentSection = {section:'',id:0};
 		this.orderSavePending = false;
