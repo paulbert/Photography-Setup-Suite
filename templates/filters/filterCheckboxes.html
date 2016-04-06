@@ -1,4 +1,4 @@
-<label ng-bind-html="label"></label>
+<label ng-bind-html="label" ng-if="label"></label>
 <div class="checkbox-group">
 	<a href="" class="small" ng-click="fcomp.allBoxes()">check all</a>
 	<div class="checkbox" ng-repeat="item in items" ng-show="fcomp.showCheckbox(item,search.query)">
