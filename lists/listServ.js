@@ -75,12 +75,13 @@
 			}
 		};
 
-		// Function to create a comma separated list of a particular property within an array 
+		// Function to create a comma separated list of a particular property within one of the lists. keyName specifies property to use (name of the item, generally). 
 		this.makeList = function(listName,keyName,subList) {
 			if(!subList) {
 				subList = 'main';
 			}
-			var listArray = this.Lists[listName][subList];
+			var listArray = this.Lists[listName][subList],
+				message = '';
 			for(var i = 0; i < listArray.length; i++) {
 				message += listArray[i][keyName];
 				if(i < listArray.length - 1) {
