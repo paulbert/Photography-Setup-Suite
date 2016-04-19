@@ -30,6 +30,17 @@
 			}
 		};
 		
+		// Copies the selected list over to the edit list (for 'edit selected' situations)
+		this.selectToEdit = function(listName) {
+			this.Lists[listName].edit = this.Lists[listName].selected;
+		};
+		
+		this.editOne = function(id,listName,idName) {
+			var index = this.findById(id,listName,idName);
+			this.Lists[listName].edit = [];
+			this.Lists[listName].edit.push(this.Lists[listName].main[index]);
+		};
+		
 		// First checks exclude array for item, then checks search value (see filterService.js)
 		this.filterCheck = function(value,index,search,keyName,listName) {
 			var listCheck = false,
