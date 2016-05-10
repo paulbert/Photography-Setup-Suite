@@ -4,7 +4,8 @@
 		
 		var lFunc = this,
 			editList = [],
-			currentFilteredList = [];
+			currentFilteredList = [],
+			orderSavePending = false;
 		
 		this.Lists = {};
 		this.sectionList = [{section:'',id:0}];
@@ -252,6 +253,14 @@
 			}
 			// Reset order variable for database.
 			resetOrder(key,ordKey,listName);
+		};
+		
+		this.getOrderSave = function() {
+			return orderSavePending;
+		};
+		
+		this.setOrderSave = function(orderSave) {
+			orderSavePending = orderSave ? orderSave : false;
 		};
 		
 	}]);

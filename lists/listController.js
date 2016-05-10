@@ -14,7 +14,6 @@
 		this.lFunc = listFunctions;
 		this.newSection = '';
 		this.currentSection = {section:'',id:0};
-		this.orderSavePending = false;
 		
 		// Toggle selection of item - changes select property of item between true/false and adds/removes from selection array (see listServ.js for function)
 		this.toggleSelect = function(item,index) {
@@ -37,7 +36,7 @@
 		// Change order of list.
 		this.moveItems = function(direction) {
 			listFunctions.moveItems(direction,key,ordKey,listName);
-			this.orderSavePending = true;
+			listFunctions.setOrderSave(true);
 		};
 		
 		this.checkSelected = function() {
