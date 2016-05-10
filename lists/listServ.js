@@ -4,11 +4,11 @@
 		
 		var lFunc = this,
 			editList = [],
-			currentFilteredList = [],
-			orderSavePending = false;
+			currentFilteredList = [];			
 		
 		this.Lists = {};
 		this.sectionList = [{section:'',id:0}];
+		this.orderSavePending = false;
 		
 		this.setList = function(listArray,listName,excludeArray) {
 			this.Lists[listName] = { main:listArray,selected:[],edit:[],filtered:[],exclude:excludeArray };
@@ -255,12 +255,8 @@
 			resetOrder(key,ordKey,listName);
 		};
 		
-		this.getOrderSave = function() {
-			return orderSavePending;
-		};
-		
 		this.setOrderSave = function(orderSave) {
-			orderSavePending = orderSave ? orderSave : false;
+			this.orderSavePending = orderSave ? orderSave : false;
 		};
 		
 	}]);
