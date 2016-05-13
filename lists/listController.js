@@ -4,7 +4,7 @@
 		
 		var lCtrl = this,
 			key = $scope.keyName,
-			ordKey = $scope.ordName,
+			ordKey = $scope.ordKey,
 			listName = $scope.listName;
 		
 		// Sets selectedList as empty array for this list number.
