@@ -103,7 +103,7 @@
 			return message;
 		};
 
-		// Returns the index of the item within the an array (specified by listName and subList) or false if not found.  Search by key (should be unique id.
+		// Returns the index of the item within the an array (specified by listName and subList) or false if not found.  Search by key (should be unique id).
 		this.findById = function(id,listName,key,subList) {
 			key = typeof key !== 'undefined' ? key : 'id';
 			subList = typeof subList !== 'undefined' ? subList : 'main';
@@ -116,13 +116,15 @@
 			return false;
 		};
 		
-		// Deletes items found in delArray from main list searching by id. Returns new array.
+		// Deletes items found in delArray from main list searching by id. Does nothing with items which are not found.
 		this.deleteById = function(delArray,idName,listName,subList) {
 			var numItems = delArray.length;
 			subList = typeof subList !== 'undefined' ? subList : 'main';
 			for(var i = 0; i < numItems; i++) {
 				var imgIndex = lFunc.findById(delArray[i][idName],listName,idName,subList);
-				lFunc.Lists[listName].main.splice(imgIndex,1);
+				if(imgIndex !== false) {
+					lFunc.Lists[listName].main.splice(imgIndex,1);
+				}
 			}
 		};
 		
