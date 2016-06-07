@@ -192,7 +192,7 @@
 				moveIndex = 0,
 				selIndex;
 			for(var i = 0; i < listTemp.length; i++) {
-				if(listTemp[i].selected || llistTemp[i].section === section) {
+				if(listTemp[i].selected || listTemp[i].section === section) {
 					if(firstIndex = -1) {
 						firstIndex = i;
 						listTemp[i].section = section;
