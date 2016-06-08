@@ -200,6 +200,7 @@
 						moveIndex = i;
 						listTemp[moveIndex].section = section;
 						listTemp.splice(firstIndex+1,0,listTemp.splice(moveIndex,1)[0]);
+						firstIndex++;
 					}
 				}
 			}
