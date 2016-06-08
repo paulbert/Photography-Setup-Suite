@@ -6,8 +6,8 @@
 		If the searched property is an array of objects (if, for example, images can be in many gallery groupings), add 'isArray' property and set to true, also add 'searchOn' property and set to the name of the property within objects.
 		Example: images = [ {imgname: 'img1.jpg', galleries: [ { id:1, name:'gallery1' }, { id:2, name:'gallery2'} ]}, ...]
 		search = { galleries: { query:'', isArray: true, searchOn: 'name' } }
-		For a checkbox filter, include an object called 'checkboxes' with a 'none' property and all possible values in 0-n property.
-		Based on above example: search = { galleries: { ... checkboxes: { none: true, 0:'gallery1',1:'gallery2' } }
+		For a checkbox filter, include an object called 'checkboxes' with a 'none' property and send in values as array through checkitems.
+		Based on above example: search = { galleries: { ... checkboxes: { none: true }, checkitems = [ 'gallery1','gallery2' ]
 	*/
 	
 	angular.module('filterMod',[])
