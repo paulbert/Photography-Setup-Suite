@@ -262,5 +262,18 @@
 			this.orderSavePending = orderSave ? orderSave : false;
 		};
 		
+		this.toggleFlag = function(id,listName,idName,toggleName,unique) {
+			var thisList = this.Lists[listName].main;
+			for(var i = 0; i < thisList.length; i++) {
+				if(thisList[i][idName] === id) {
+					thisList[i][toggleName] = '1';
+				} else {
+					if(unique) {
+						thisList[i][toggleName] = '0';
+					}
+				}
+			}
+		};
+		
 	}]);
 })();
