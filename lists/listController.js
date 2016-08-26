@@ -13,7 +13,7 @@
 		
 		this.lFunc = listFunctions;
 		this.newSection = '';
-		this.currentSection = {section:'',id:0};
+		this.currentSection = '';
 		
 		// Toggle selection of item - changes select property of item between true/false and adds/removes from selection array (see listServ.js for function)
 		this.toggleSelect = function(item,index) {
@@ -49,6 +49,14 @@
 		
 		this.deselectAll = function() {
 			listFunctions.deselectAll(key,listName);
+		};
+		
+		this.linkSection = function(section) {
+			listFunctions.groupSelected(key,ordKey,section,listName);
+		};
+		
+		this.addToSections = function(section) {
+			listFunctions.addToSections(section,listName);
 		};
 		
 	}])

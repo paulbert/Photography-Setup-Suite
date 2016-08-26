@@ -7,11 +7,19 @@
 			currentFilteredList = [];			
 		
 		this.Lists = {};
-		this.sectionList = [{section:'',id:0}];
 		this.orderSavePending = false;
 		
 		this.setList = function(listArray,listName,excludeArray) {
-			this.Lists[listName] = { main:listArray,selected:[],edit:[],filtered:[],exclude:excludeArray };
+			this.Lists[listName] = { main:listArray,selected:[],edit:[],filtered:[],exclude:excludeArray,sections:[''] };
+			var mainArray = this.Lists[listName].main,
+				sectionArray = this.Lists[listName].sections;
+			for(var i = 0; i < mainArray.length; i++) {
+				if(mainArray[i].section) {
+					if(sectionArray.indexOf(mainArray[i].section)) {
+						sectionArray.push(mainArray[i].section);
+					}
+				}
+			}
 		};
 		
 		this.clearSelected = function(listName) {
@@ -273,6 +281,10 @@
 					}
 				}
 			}
+		};
+		
+		this.addToSections = function(section,listName) {
+			this.Lists[listName].sections.push(section);
 		};
 		
 	}]);

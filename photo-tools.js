@@ -319,7 +319,7 @@
 		
 		this.lFunc = listFunctions;
 		this.newSection = '';
-		this.currentSection = {section:'',id:0};
+		this.currentSection = '';
 		
 		// Toggle selection of item - changes select property of item between true/false and adds/removes from selection array (see listServ.js for function)
 		this.toggleSelect = function(item,index) {
@@ -357,6 +357,14 @@
 			listFunctions.deselectAll(key,listName);
 		};
 		
+		this.linkSection = function(section) {
+			listFunctions.groupSelected(key,ordKey,section,listName);
+		};
+		
+		this.addToSections = function(section) {
+			listFunctions.addToSections(section,listName);
+		};
+		
 	}])
 	
 	;
@@ -370,11 +378,19 @@
 			currentFilteredList = [];			
 		
 		this.Lists = {};
-		this.sectionList = [{section:'',id:0}];
 		this.orderSavePending = false;
 		
 		this.setList = function(listArray,listName,excludeArray) {
-			this.Lists[listName] = { main:listArray,selected:[],edit:[],filtered:[],exclude:excludeArray };
+			this.Lists[listName] = { main:listArray,selected:[],edit:[],filtered:[],exclude:excludeArray,sections:[''] };
+			var mainArray = this.Lists[listName].main,
+				sectionArray = this.Lists[listName].sections;
+			for(var i = 0; i < mainArray.length; i++) {
+				if(mainArray[i].section) {
+					if(sectionArray.indexOf(mainArray[i].section)) {
+						sectionArray.push(mainArray[i].section);
+					}
+				}
+			}
 		};
 		
 		this.clearSelected = function(listName) {
@@ -636,6 +652,10 @@
 					}
 				}
 			}
+		};
+		
+		this.addToSections = function(section,listName) {
+			this.Lists[listName].sections.push(section);
 		};
 		
 	}]);
