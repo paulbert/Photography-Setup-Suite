@@ -14,10 +14,8 @@
 			var mainArray = this.Lists[listName].main,
 				sectionArray = this.Lists[listName].sections;
 			for(var i = 0; i < mainArray.length; i++) {
-				if(mainArray[i].section) {
-					if(sectionArray.indexOf(mainArray[i].section)) {
-						sectionArray.push(mainArray[i].section);
-					}
+				if(mainArray[i].section && sectionArray.indexOf(mainArray[i].section) === -1) {
+					sectionArray.push(mainArray[i].section);
 				}
 			}
 		};
