@@ -339,9 +339,9 @@
 			return listFunctions.Lists[listName][subList].length;
 		};
 		
-		// Change order of list.
-		this.moveItems = function(direction) {
-			listFunctions.moveItems(direction,key,ordKey,listName);
+		// Move selected items or one item if specified.
+		this.moveItems = function(direction,item) {
+			listFunctions.moveItems(direction,key,ordKey,listName,item || item[key]);
 			listFunctions.setOrderSave(true);
 		};
 		
@@ -585,18 +585,31 @@
 			resetOrder(key,ordKey,listName,section);
 		};
 		
-		// Moves an item or items.  Checks the sections of the items to ensure items within same section stick together.
-		this.moveItems = function(direction,key,ordKey,listName) {
+		// Moves one item.  Checks the sections of the items to ensure items within same section stick together.
+		var selectedIdArray = function(key,listName) {
+			return lFunc.Lists[listName].selected.map(function(val) { return val[key]; });
+		};
+		
+		// Moves selected items or one item as specified by id.  Checks the sections of the items to ensure items within same section stick together.
+		this.moveItems = function(direction,key,ordKey,listName,id) {
 			var selSection,
 				listLen = lFunc.Lists[listName].main.length,
 				multiplier,
-				nextSection;
+				nextSection,
+				idArray;
+				
+			if(id) {
+				idArray = [id];
+			} else {
+				idArray = selectedIdArray(key,listName);
+			}
+			
 			var i = direction > 0 ? listLen - 1 : 0;
 			// Loop through main list opposite the direction of the movement of items to make sure order is otherwise preserved.
 			for(i; i < listLen && i >= 0; i = i - direction) {
 				multiplier = 1;
 				// If the item is in the selected list or the section is moving.
-				if(lFunc.findById(lFunc.Lists[listName].main[i][key],listName,key,'selected') !== false || lFunc.Lists[listName].main[i].section === selSection) {
+				if(idArray.indexOf(lFunc.Lists[listName].main[i][key]) !== -1 || lFunc.Lists[listName].main[i].section === selSection) {
 					// Set selSection to section of a selected item.
 					if(lFunc.Lists[listName].main[i].section !== '') {
 						selSection = lFunc.Lists[listName].main[i].section;
