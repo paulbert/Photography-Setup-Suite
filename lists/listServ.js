@@ -267,9 +267,9 @@
 							}
 						}
 						// Final check: only move an item if it is selected or to ensure items of the same section stick together
-						if(lFunc.Lists[listName].main[i].selected || lFunc.Lists[listName].main[i+direction].section !== lFunc.Lists[listName].main[i].section) {
+						// if(lFunc.Lists[listName].main[i].selected || lFunc.Lists[listName].main[i+direction].section !== lFunc.Lists[listName].main[i].section) {
 							lFunc.Lists[listName].main.splice(i+(direction*multiplier),0,lFunc.Lists[listName].main.splice(i,1)[0]);
-						}
+						// }
 					}
 				}
 			}
