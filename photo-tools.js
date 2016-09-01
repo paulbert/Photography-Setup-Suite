@@ -341,7 +341,7 @@
 		
 		// Move selected items or one item if specified.
 		this.moveItems = function(direction,item) {
-			listFunctions.moveItems(direction,key,ordKey,listName,item || item[key]);
+			listFunctions.moveItems(direction,key,ordKey,listName,item && item[key]);
 			listFunctions.setOrderSave(true);
 		};
 		
