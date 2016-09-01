@@ -289,7 +289,7 @@
 			if(this.findById(tempId,listName,idName) === false) {
 				return tempId;
 			}
-			return makeTempId(listName,idName,tempId + 1);
+			return this.makeTempId(listName,idName,tempId + 1);
 		};	
 	}]);
 })();
