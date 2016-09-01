@@ -221,7 +221,7 @@
 		
 		// Moves selected items or one item as specified by id.  Checks the sections of the items to ensure items within same section stick together.
 		this.moveItems = function(direction,key,ordKey,listName,id) {
-			var selSection,
+			var selSection = null,
 				listLen = lFunc.Lists[listName].main.length,
 				multiplier,
 				nextSection,
@@ -240,7 +240,7 @@
 				// If the item is in the selected list or the section is moving.
 				if(idArray.indexOf(lFunc.Lists[listName].main[i][key]) !== -1 || lFunc.Lists[listName].main[i].section === selSection) {
 					// Set selSection to section of a selected item.
-					if(lFunc.Lists[listName].main[i].section !== '') {
+					if(lFunc.Lists[listName].main[i].section) {
 						selSection = lFunc.Lists[listName].main[i].section;
 					}
 					// If the movement would put the item outside of list boundaries or another selection has hit those boundaries don't move.
