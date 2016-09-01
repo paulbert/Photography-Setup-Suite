@@ -285,5 +285,11 @@
 			this.Lists[listName].sections.push(section);
 		};
 		
+		this.makeTempId = function(listName,idName,tempId) {
+			if(this.findById(tempId,listName,idName) === false) {
+				return tempId;
+			}
+			return makeTempId(listName,idName,tempId + 1);
+		};	
 	}]);
 })();
