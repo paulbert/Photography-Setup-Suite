@@ -521,7 +521,7 @@
 				subLists = [ 'selected', 'filtered', 'edit' ];
 			}
 			for(i = 0; i < subList.length; i++) {
-				finishDelete(listName,subLists[i];
+				finishDelete(listName,subLists[i]);
 			}
 		};
 		
