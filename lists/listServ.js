@@ -149,7 +149,7 @@
 			if(subList === 'main') {
 				subLists = [ 'selected', 'filtered', 'edit' ];
 			}
-			for(i = 0; i < subList.length; i++) {
+			for(i = 0; i < subLists.length; i++) {
 				finishDelete(listName,subLists[i]);
 			}
 		};
