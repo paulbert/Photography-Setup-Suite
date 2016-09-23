@@ -496,7 +496,7 @@
 		// Finish a delete by id on the main list by clearing the sublists as well
 		var finishDelete = function(listName,subList) {
 			var list = lFunc.Lists[listName][subList];
-			for(var i = list.length; i > -1; i--) {
+			for(var i = list.length - 1; i > -1; i--) {
 				if(list[i].delete) {
 					list.splice(i,1);
 				}
