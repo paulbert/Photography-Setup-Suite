@@ -493,6 +493,16 @@
 			return false;
 		};
 		
+		// Finish a delete by id on the main list by clearing the sublists as well
+		var finishDelete = function(listName,subList) {
+			var list = lFunc.Lists[listName][subList];
+			for(var i = list.length; i > -1; i--) {
+				if(list[i] === 'delete') {
+					list.splice(i,1);
+				}
+			}
+		};
+		
 		// Deletes items found in delArray from main list searching by id. Does nothing with items which are not found.
 		this.deleteById = function(delArray,idName,listName,subList) {
 			var numItems = delArray.length;
@@ -500,8 +510,18 @@
 			for(var i = 0; i < numItems; i++) {
 				var imgIndex = lFunc.findById(delArray[i][idName],listName,idName,subList);
 				if(imgIndex !== false) {
-					lFunc.Lists[listName].main.splice(imgIndex,1);
+					if(subList === 'main') {
+						lFunc.Lists[listName][subList][i] = 'delete';
+					}
+					lFunc.Lists[listName][subList].splice(imgIndex,1);
 				}
+			}
+			var subLists = [];
+			if(subList === 'main') {
+				subLists = [ 'selected', 'filtered', 'edit' ];
+			}
+			for(i = 0; i < subList.length; i++) {
+				finishDelete(listName,subLists[i];
 			}
 		};
 		
