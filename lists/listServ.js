@@ -140,7 +140,7 @@
 				var imgIndex = lFunc.findById(delArray[i][idName],listName,idName,subList);
 				if(imgIndex !== false) {
 					if(subList === 'main') {
-						lFunc.Lists[listName][subList][i] = 'delete';
+						lFunc.Lists[listName][subList][imgIndex] = 'delete';
 					}
 					lFunc.Lists[listName][subList].splice(imgIndex,1);
 				}
