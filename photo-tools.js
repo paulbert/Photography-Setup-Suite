@@ -497,7 +497,7 @@
 		var finishDelete = function(listName,subList) {
 			var list = lFunc.Lists[listName][subList];
 			for(var i = list.length; i > -1; i--) {
-				if(list[i] === 'delete') {
+				if(list[i].delete) {
 					list.splice(i,1);
 				}
 			}
@@ -511,7 +511,7 @@
 				var imgIndex = lFunc.findById(delArray[i][idName],listName,idName,subList);
 				if(imgIndex !== false) {
 					if(subList === 'main') {
-						lFunc.Lists[listName][subList][imgIndex] = 'delete';
+						lFunc.Lists[listName][subList][imgIndex].delete = true;
 					}
 					lFunc.Lists[listName][subList].splice(imgIndex,1);
 				}
