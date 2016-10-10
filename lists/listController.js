@@ -16,7 +16,8 @@
 		this.currentSection = '';
 		
 		// Toggle selection of item - changes select property of item between true/false and adds/removes from selection array (see listServ.js for function)
-		this.toggleSelect = function(item,index) {
+		// Optional selectOne: if true all items will be deselected first so only one item is selected at a time
+		this.toggleSelect = function(item,index,selectOne) {
 			listFunctions.toggleSelect(item,index,key,listName);		
 		};
 		

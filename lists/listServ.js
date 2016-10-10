@@ -80,11 +80,16 @@
 			return this.Lists[listName].filtered;
 		};
 		
-		this.toggleSelect = function(item,index,key,listName) {
+		// Toggle selection of item - changes select property of item between true/false and adds/removes from selection array
+		// Optional selectOne: if true all items will be deselected first so only one item is selected at a time 
+		this.toggleSelect = function(item,index,key,listName,selectOne) {
 			key = key ? key : 'id';
 			var id = item[key];
 			if(!index && index !== 0) {
 				index = this.findById(id,listName,key,'main');
+			}
+			if(selectOne) {
+				this.deselectAll(key,listName);
 			}
 			if(!item.selected) {
 				this.selectItem(item,index,key,listName);
