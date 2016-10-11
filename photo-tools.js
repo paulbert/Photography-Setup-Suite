@@ -3,6 +3,29 @@
 	
 })();
 (function() {
+	angular.module('listMod',[])
+	.directive('listOfItems',function() {
+		return {
+			scope: {
+				search:'=',
+				listName:'=list',
+				keyName:'@key',
+				ordKey:'@ordname',
+				// Additional functions to be called from buttons in the list (save info, delete, etc)
+				addFuncs:'=funcs',
+				tmplt:'='
+			},
+			template: '<div ng-include="templateUrl"></div>',
+			controller:'listController',
+			controllerAs:'list',
+			link: function(scope,element,attrs) {
+				scope.templateUrl = scope.tmplt.base + scope.tmplt.fileName;
+			}
+		}
+	})
+	;
+})();
+(function() {
 	
 	/*
 	Search variable should be an array of objects named the same as the properties of the objects within the list.
@@ -34,29 +57,6 @@
 	})
 	;
 		
-})();
-(function() {
-	angular.module('listMod',[])
-	.directive('listOfItems',function() {
-		return {
-			scope: {
-				search:'=',
-				listName:'=list',
-				keyName:'@key',
-				ordKey:'@ordname',
-				// Additional functions to be called from buttons in the list (save info, delete, etc)
-				addFuncs:'=funcs',
-				tmplt:'='
-			},
-			template: '<div ng-include="templateUrl"></div>',
-			controller:'listController',
-			controllerAs:'list',
-			link: function(scope,element,attrs) {
-				scope.templateUrl = scope.tmplt.base + scope.tmplt.fileName;
-			}
-		}
-	})
-	;
 })();
 (function() {
 	
@@ -324,7 +324,7 @@
 		// Toggle selection of item - changes select property of item between true/false and adds/removes from selection array (see listServ.js for function)
 		// Optional selectOne: if true all items will be deselected first so only one item is selected at a time
 		this.toggleSelect = function(item,index,selectOne) {
-			listFunctions.toggleSelect(item,index,key,listName);		
+			listFunctions.toggleSelect(item,index,key,listName,selectOne);		
 		};
 		
 		// Custom filter function checking item first against a list of exclusions then against custom filter values
