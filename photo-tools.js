@@ -3,29 +3,6 @@
 	
 })();
 (function() {
-	angular.module('listMod',[])
-	.directive('listOfItems',function() {
-		return {
-			scope: {
-				search:'=',
-				listName:'=list',
-				keyName:'@key',
-				ordKey:'@ordname',
-				// Additional functions to be called from buttons in the list (save info, delete, etc)
-				addFuncs:'=funcs',
-				tmplt:'='
-			},
-			template: '<div ng-include="templateUrl"></div>',
-			controller:'listController',
-			controllerAs:'list',
-			link: function(scope,element,attrs) {
-				scope.templateUrl = scope.tmplt.base + scope.tmplt.fileName;
-			}
-		}
-	})
-	;
-})();
-(function() {
 	
 	/*
 	Search variable should be an array of objects named the same as the properties of the objects within the list.
@@ -57,6 +34,29 @@
 	})
 	;
 		
+})();
+(function() {
+	angular.module('listMod',[])
+	.directive('listOfItems',function() {
+		return {
+			scope: {
+				search:'=',
+				listName:'=list',
+				keyName:'@key',
+				ordKey:'@ordname',
+				// Additional functions to be called from buttons in the list (save info, delete, etc)
+				addFuncs:'=funcs',
+				tmplt:'='
+			},
+			template: '<div ng-include="templateUrl"></div>',
+			controller:'listController',
+			controllerAs:'list',
+			link: function(scope,element,attrs) {
+				scope.templateUrl = scope.tmplt.base + scope.tmplt.fileName;
+			}
+		}
+	})
+	;
 })();
 (function() {
 	
@@ -454,19 +454,18 @@
 		
 		// Toggle selection of item - changes select property of item between true/false and adds/removes from selection array
 		// Optional selectOne: if true all items will be deselected first so only one item is selected at a time 
+		// NOTE: index parameter is changed to fallback in case id not found
 		this.toggleSelect = function(item,index,key,listName,selectOne) {
 			key = key ? key : 'id';
 			var id = item[key];
-			if(!index && index !== 0) {
-				index = this.findById(id,listName,key,'main');
-			}
+			var idIndex = this.findById(id,listName,key,'main');
 			if(selectOne) {
 				this.deselectAll(key,listName);
 			}
 			if(!item.selected) {
-				this.selectItem(item,index,key,listName);
+				this.selectItem(item,idIndex || index,key,listName);
 			} else {
-				this.deselectItem(id,index,key,listName);
+				this.deselectItem(id,idIndex || index,key,listName);
 			}
 		};
 
